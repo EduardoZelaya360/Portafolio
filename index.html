@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eduardo Zelaya — Analista de Datos & Desarrollador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b27;
+      --bg3: #1e2535;
+      --accent: #4f8ef7;
+      --accent2: #7dd3fc;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: rgba(255,255,255,0.07);
+      --card-bg: #161b27;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 2rem;
+      max-width: 900px; margin: 0 auto;
+    }
+
+    .hero-inner { padding-top: 5rem; }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    h1.hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    h2.hero-role {
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 14px; font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #6b9ff8; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      color: var(--text);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.85; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .stat-number {
+      font-family: var(--mono);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-group {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .skill-group-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 12px;
+      background: rgba(79,142,247,0.1);
+      color: var(--accent2);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 4px;
+      padding: 3px 10px;
+      margin: 3px 3px 3px 0;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .exp-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .exp-item:hover { border-color: rgba(79,142,247,0.3); }
+
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+
+    .exp-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .exp-company { font-size: 14px; color: var(--accent); margin-top: 2px; }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--bg3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .exp-desc { color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .exp-tags { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: rgba(79,142,247,0.3); transform: translateY(-2px); }
+
+    .project-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1; }
+    .project-tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 1rem;
+      font-size: 13px; color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-text { color: var(--muted); line-height: 1.85; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .contact-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0.875rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-link-icon { font-size: 18px; color: var(--accent); width: 20px; text-align: center; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 1.25rem; }
+      .hero { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">ez.dev</span>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Disponible para nuevas oportunidades</p>
+      <h1 class="hero-name">Eduardo Zelaya</h1>
+      <h2 class="hero-role">Analista de Datos & Desarrollador</h2>
+      <p class="hero-desc">
+        Estudiante de Informática Administrativa en UNAH con experiencia práctica desarrollando módulos
+        empresariales, automatizando procesos y transformando datos en soluciones concretas.
+      </p>
+      <div class="hero-cta">
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-outline">Contáctame</a>
+        <!-- Reemplaza el href con el link real a tu CV en PDF -->
+        <a href="Archivos\Cv actualizado evon zelaya.pdf" class="btn btn-outline" download>Descargar CV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi">
+    <p class="section-label">// 01</p>
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Soy estudiante de Licenciatura en Informática Administrativa en la Universidad Nacional Autónoma
+          de Honduras (UNAH), con enfoque en análisis de datos y desarrollo de aplicaciones empresariales.
+        </p>
+        <p>
+          Durante mi práctica profesional en Tigo Honduras desarrollé módulos reales en producción:
+          gestión de averías, seguimiento de reclamos, ticketing con bots FCR y carga masiva de datos
+          en Oracle Database desde Excel.
+        </p>
+        <p>
+          Me interesa construir herramientas que resuelvan problemas reales, especialmente en el cruce
+          entre datos y desarrollo. Actualmente aprendiendo Python, profundizando en SQL y explorando C#.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">2+</div>
+          <div class="stat-label">Experiencias Laborales</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Módulos desarrollados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">HN</div>
+          <div class="stat-label">Tegucigalpa, Honduras</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">ES/EN</div>
+          <div class="stat-label">Idiomas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <p class="section-label">// 02</p>
+    <h2 class="section-title">Habilidades técnicas</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Bases de datos</div>
+        <span class="skill-tag">Oracle DB</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">PL/SQL</span>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Desarrollo</div>
+        <span class="skill-tag">Oracle APEX</span>
+        <span class="skill-tag">Python (aprendiendo)</span>
+        <span class="skill-tag">C# (aprendiendo)</span>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Análisis & Reportes</div>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Excel avanzado</span>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Herramientas</div>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">VS Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia">
+    <p class="section-label">// 03</p>
+    <h2 class="section-title">Experiencia</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Desarrollador — Práctica Profesional</div>
+            <div class="exp-company">Tigo Honduras</div>
+          </div>
+          <span class="exp-date">2024</span>
+        </div>
+        <p class="exp-desc">
+          Desarrollo de módulos empresariales en Oracle APEX: gestión de averías, seguimiento de
+          reclamos, sistema de ticketing con bot FCR, administración de órdenes de trabajo N2
+          y carga masiva de datos desde Excel hacia Oracle Database. Generación de reportes
+          operativos y dashboards para toma de decisiones.
+        </p>
+        <div class="exp-tags">
+          <span class="skill-tag">Oracle APEX</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Power BI</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Proyecto de carrera</div>
+            <div class="exp-company">Asociación para el Servicio Mundial</div>
+          </div>
+          <span class="exp-date">2023</span>
+        </div>
+        <p class="exp-desc">
+          Apoyo en procesos tecnológicos y gestión de información dentro de la organización.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <p class="section-label">// 04</p>
+    <h2 class="section-title">Proyectos</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-title">Dashboard de gestión de averías</div>
+        <p class="project-desc">
+          Módulo desarrollado en Oracle APEX para el seguimiento en tiempo real de averías
+          reportadas, con integración a Oracle DB y reportes automatizados.
+        </p>
+        <div class="project-tags">
+          <span class="skill-tag">Oracle APEX</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Oracle DB</span>
+        </div>
+        <!-- Descomenta y edita cuando tengas el link de GitHub:
+        <a href="https://github.com/tuusuario/proyecto" class="project-link" target="_blank">
+          Ver repositorio →
+        </a>
+        -->
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <div class="project-title">Sistema de ticketing FCR</div>
+        <p class="project-desc">
+          Integración de bot para la creación automática de tickets de soporte, reduciendo
+          el tiempo de registro manual y mejorando el FCR del área de operaciones.
+        </p>
+        <div class="project-tags">
+          <span class="skill-tag">Oracle APEX</span>
+          <span class="skill-tag">PL/SQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📁</div>
+        <div class="project-title">Carga masiva Excel → Oracle</div>
+        <p class="project-desc">
+          Herramienta para importar grandes volúmenes de datos desde archivos Excel hacia
+          Oracle Database, con validaciones y reportes de errores automáticos.
+        </p>
+        <div class="project-tags">
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+
+      <!-- TARJETA PLACEHOLDER — Agrega aquí tus próximos proyectos personales
+      <div class="project-card" style="border-style: dashed; opacity: 0.5;">
+        <div class="project-icon">🚀</div>
+        <div class="project-title">Próximamente</div>
+        <p class="project-desc">
+          Proyecto personal en Python / SQL en desarrollo. Actualiza este portafolio
+          cuando esté listo.
+        </p>
+        <div class="project-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <p class="section-label">// 05</p>
+    <h2 class="section-title">Contacto</h2>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p style="margin-bottom: 1rem;">
+          Estoy abierto a oportunidades laborales o proyectos freelance.
+        </p>
+        <p>
+          Si tienes una propuesta o quieres colaborar, escríbeme. Respondo en 24 horas.
+        </p>
+      </div>
+      <div class="contact-links">
+        <!-- Reemplaza los href con tus links reales -->
+        <a href="mailto:eduardozelaya360@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          eduardozelaya360@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/evon-eduardo-zelaya-nu%C3%B1ez-524214411/" class="contact-link" target="_blank">
+          <span class="contact-link-icon">in</span>
+          linkedin.com/in/evon-eduardo-zelaya-nuñez-524214411/
+        </a>
+        <a href="https://github.com/EduardoZelaya360" class="contact-link" target="_blank">
+          <span class="contact-link-icon">⌥</span>
+          github.com/EduardoZelaya360
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Construido por Eduardo Zelaya · Tegucigalpa, Honduras · 2025</p>
+  </footer>
+
+</body>
+</html>
